@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "311390599014",
+    "firebase_url": "https://jamii-cf-app.firebaseio.com",
+    "project_id": "jamii-cf-app",
+    "storage_bucket": "jamii-cf-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311390599014:android:94eb68f123641a48fc7aa7",
+        "android_client_info": {
+          "package_name": "com.dan.jamiicfapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311390599014-lbvmfbdoo4qoq9jqtpdjke5l2g0ln6rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqlIJaafGMuD04nw9IdBq6xCyoc5n8fiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311390599014-lbvmfbdoo4qoq9jqtpdjke5l2g0ln6rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

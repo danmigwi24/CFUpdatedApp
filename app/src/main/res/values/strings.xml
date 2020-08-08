@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Jamii CF App</string>
+    <string name="title_activity_home">Jamii CF App</string>
+    <string name="title_home">Home</string>
+    <string name="title_events">Events</string>
+    <string name="title_feedbacks">FeedBacks</string>
+
+    <string name="text_details">For at-risk youth, the summer can be an especially challenging time. Lack of structure and guidance makes it difficult for the girls to maintain the gains they have made throughout the year. Due to the pandemic this year, the girls have had less time to solidify the progress they have made through much hard work.To prevent a downward spiral, it became apparent that a brief, intensive therapeutic program would benefit the girls and their families. As a result of the pandemic, many of the families are facing</string>
+</resources>
