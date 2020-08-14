@@ -4,6 +4,16 @@
     <string name="title_home">Home</string>
     <string name="title_events">Events</string>
     <string name="title_feedbacks">FeedBacks</string>
+    <string name="title_report">Reports</string>
 
     <string name="text_details">For at-risk youth, the summer can be an especially challenging time. Lack of structure and guidance makes it difficult for the girls to maintain the gains they have made throughout the year. Due to the pandemic this year, the girls have had less time to solidify the progress they have made through much hard work.To prevent a downward spiral, it became apparent that a brief, intensive therapeutic program would benefit the girls and their families. As a result of the pandemic, many of the families are facing</string>
+    <string name="title_activity_comment">CommentActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

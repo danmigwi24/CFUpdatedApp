@@ -2,6 +2,7 @@ package com.dan.jamiicfapp.ui.jcahome.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,7 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
         Coroutines.main {
             val pwd = homeViewModel.pwdlist.await()
             pwd.observe(requireActivity(), Observer { detailsofpwd ->
+                Log.e("Detailsofpwd",detailsofpwd.toString())
                 recyclerView.apply {
                     pwdDetailsAdapter = PwdDetailsAdapter(this@HomeFragment, detailsofpwd) {
                         val intent = Intent(requireContext(), MoreDetailsPWDSActivity::class.java)
@@ -62,7 +64,7 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
                         startActivity(intent)
                         sessionManager.savePwdId(it.id.toString())
                     }
-                    layoutManager = LinearLayoutManager(this.context!!)
+                    layoutManager = LinearLayoutManager(activity)
                     setHasFixedSize(true)
                     adapter = pwdDetailsAdapter
                 }

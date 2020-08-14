@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter phonenumber"
-                    android:text="708789789"
+                    android:text="798989898"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Password"
-                android:text="luc"
+                android:text="daniel"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 

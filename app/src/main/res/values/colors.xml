@@ -8,6 +8,7 @@
     <color name="gradient_end">#D40012</color>
 
     <color name="text_black">#000</color>
+    <color name="btn_reg">#E80955</color>
     <color name="text_blue">#2F4BE6</color>
     <color name="indicator">#6F6C6C</color>
 </resources>

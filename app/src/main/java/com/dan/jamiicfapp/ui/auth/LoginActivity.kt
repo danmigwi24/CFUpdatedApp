@@ -54,7 +54,8 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
             if (user != null) {
                 Intent(this@LoginActivity, HomeActivity::class.java).apply {
                     sessionManager.saveUserId(user.id.toString())
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    sessionManager.savePhoneNumber(user.phonenumber)
+                    //flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(this)
                 }
 
@@ -90,7 +91,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
                         phonenumber,
                         binding.editTextPin.text.toString().trim()
                     )
-                    sessionManager.savePhoneNumber(phonenumber)
+                    //sessionManager.savePhoneNumber(binding.editTextPhonenumber.text.toString())
                     if (response.user != null) {
                         loginViewModel.saveUserVmRoom(response.user)
                         progressBar.visibility = View.GONE
@@ -119,11 +120,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
                     toast(e.toString())
                     progressBar.visibility = View.GONE
                 }
-
-
             }
-
-
         }
 
 

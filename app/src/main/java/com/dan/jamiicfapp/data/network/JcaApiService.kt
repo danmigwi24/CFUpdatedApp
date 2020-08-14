@@ -1,9 +1,12 @@
 package com.dan.jamiicfapp.data.network
 
-import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.DonationResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.AuthResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.PwdResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentByIdResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.DonationResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.eventresponse.EventsResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse.FeedbackResponse
 import com.dan.jamiicfapp.data.network.requestbodys.RegisterDetails
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -15,7 +18,6 @@ import retrofit2.http.*
 
 
 interface JcaApiService {
-
     @FormUrlEncoded
     @POST("login")
     suspend fun login_Api(
@@ -36,13 +38,30 @@ interface JcaApiService {
 
     @FormUrlEncoded
     @POST("donate")
-    fun donate(
+    suspend fun donate(
         @Field("pwd_id") pwd_id: String,
         @Field("member_community_id") member_community_id: String,
         @Field("phonenumber") phonenumber: String,
         @Field("amount_donated") amount_donated: String
     ): Response<DonationResponse>
 
+    @FormUrlEncoded
+    @POST("feedback")
+    suspend fun feedbackApi(
+        @Field("member_community_id") member_community_id: String,
+        @Field("feedback") feedback: String
+    ): Response<FeedbackResponse>
+
+    @FormUrlEncoded
+    @POST("comment")
+    suspend fun comment(
+        @Field("pwd_id") pwd_id: String,
+        @Field("member_community_id") member_community_id: String,
+        @Field("comment") comment: String
+    ): Response<CommentResponse>
+
+    @GET("commentID/2")
+    suspend fun getCommentByPwdID(): Response<CommentByIdResponse>
 
     companion object {
         operator fun invoke(networkInterceptor: NetworkInterceptor): JcaApiService {

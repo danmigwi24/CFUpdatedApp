@@ -14,6 +14,7 @@ class SessionManager(context: Context) {
         const val USER_TOKEN2 = "user_token"
         const val PHONENUMBER = "phonenumber"
         const val KEY_SAVED_TIME: String = "time"
+        const val KEY_SAVED_TIME2: String = "time"
         const val PWD_ID: String = "time2"
     }
 
@@ -29,6 +30,16 @@ class SessionManager(context: Context) {
 
     fun fetchTimeStamp(): String? {
         return prefs.getString(KEY_SAVED_TIME, null)
+
+    }
+   fun saveTimeStamp2(time: String) {
+        val editor = prefs.edit()
+        editor.putString(KEY_SAVED_TIME2, time)
+        editor.apply()
+    }
+
+    fun fetchTimeStamp2(): String? {
+        return prefs.getString(KEY_SAVED_TIME2, null)
 
     }
 

@@ -22,4 +22,9 @@
         android:name="com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.FeedbacksFragment"
         android:label="@string/title_feedbacks"
         tools:layout="@layout/fragment_feedbacks" />
+    <fragment
+        android:id="@+id/navigation_report"
+        android:name="com.dan.jamiicfapp.ui.jcahome.ui.reports.ReportsFragment"
+        android:label="@string/title_report"
+        tools:layout="@layout/reports_fragment" />
 </navigation>

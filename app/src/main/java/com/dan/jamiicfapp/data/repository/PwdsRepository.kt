@@ -18,7 +18,7 @@ class PwdsRepository(
     private val appDatabase: AppDatabase,
     private val sessionManager: SessionManager
 ) : SafeApiRequest() {
-    private val MINIMUM_INTERVAL = 6
+    private val MINIMUM_INTERVAL = 0.0333333
 
     private val pwds = MutableLiveData<List<DisabledDetails>>()
 
@@ -37,13 +37,15 @@ class PwdsRepository(
 
     private suspend fun fetchPwDetails() {
         val lastSavedAT = sessionManager.fetchTimeStamp()
-        if (lastSavedAT == null || isFetchNeeded(LocalDateTime.parse(lastSavedAT))) {
+         if(lastSavedAT == null || isFetchNeeded(LocalDateTime.parse(lastSavedAT))) {
+            //if (lastSavedAT == null) {
             val response = apiRequest { jcaApiService.viewpwds() }
             pwds.postValue(response.pwdDetailsInServer)
         }
     }
 
     private fun isFetchNeeded(savedAt: LocalDateTime): Boolean {
+        //return true
         return ChronoUnit.HOURS.between(savedAt, LocalDateTime.now()) > MINIMUM_INTERVAL
     }
 

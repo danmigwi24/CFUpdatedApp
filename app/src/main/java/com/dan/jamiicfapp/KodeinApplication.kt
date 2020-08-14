@@ -5,12 +5,11 @@ import com.dan.jamiicfapp.data.db.AppDatabase
 import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.data.network.JcaApiService
 import com.dan.jamiicfapp.data.network.NetworkInterceptor
-import com.dan.jamiicfapp.data.repository.AuthRepository
-import com.dan.jamiicfapp.data.repository.DonateRepository
-import com.dan.jamiicfapp.data.repository.EventsRepository
-import com.dan.jamiicfapp.data.repository.PwdsRepository
+import com.dan.jamiicfapp.data.repository.*
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModelFactory
+import com.dan.jamiicfapp.ui.commentui.cviewmodel.CommentViewModelFactory
 import com.dan.jamiicfapp.ui.jcahome.ui.events.eventveiwmodel.EventsViewModelFactory
+import com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.feedbackviewmodel.FeedbackViewModelFactory
 import com.dan.jamiicfapp.ui.jcahome.ui.home.homeviewmodel.HomeViewModelFactory
 import com.dan.jamiicfapp.ui.paymentmode.MpesaViewModelProvider
 import org.kodein.di.Kodein
@@ -49,11 +48,20 @@ class KodeinApplication : Application(), KodeinAware {
         bind() from provider { MpesaViewModelProvider(instance()) }
 
         //Events
-        bind() from singleton { EventsRepository(instance(), instance()) }
+        bind() from singleton { EventsRepository(instance(), instance(), instance()) }
         bind() from provider {
             EventsViewModelFactory(
                 instance()
             )
         }
+
+        //FeedBack
+        bind() from singleton { FeedBackRepository(instance()) }
+        bind() from provider { FeedbackViewModelFactory(instance()) }
+
+        //Comment
+        bind() from singleton { CommentRepository(instance(), instance(), instance()) }
+        bind() from provider { CommentViewModelFactory(instance()) }
+
     }
 }

@@ -14,7 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.jcahome.ui.events.MoreAboutEventsActivity"></activity>
+        <activity android:name=".ui.commentui.AddcommentActivity"></activity>
+        <activity
+            android:name=".ui.commentui.CommentActivity"
+            android:label="@string/title_activity_comment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.jcahome.ui.events.MoreAboutEventsActivity" />
         <activity
             android:name=".ui.auth.RegisterActivity"
             android:parentActivityName=".ui.WelcomeActivity" />

@@ -1,4 +1,4 @@
-package com.dan.jamiicfapp.data.db
+package com.dan.jamiicfapp.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

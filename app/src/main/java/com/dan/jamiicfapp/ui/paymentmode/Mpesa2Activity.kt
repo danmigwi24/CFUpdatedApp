@@ -68,8 +68,8 @@ class Mpesa2Activity : AppCompatActivity(), KodeinAware {
         sessionManager = SessionManager(this)
         viewModel = ViewModelProvider(this, factory).get(MpesaViewModel::class.java)
 
-        phonenumber2 = phoneNumber.setText("0${sessionManager.fetchPhoneNumber()}").toString()
-        Log.e("phone", phonenumber2)
+        phonenumber2 = phoneNumber.setText("+${sessionManager.fetchPhoneNumber()}").toString()
+        Log.e("phone", "${sessionManager.fetchPhoneNumber()}")
         initDaraja()
         initBroadcastReceiver()
 
