@@ -1,15 +1,22 @@
 package com.dan.jamiicfapp.data.network
 
 import com.dan.jamiicfapp.data.network.jcaresponse.AuthResponse
-import com.dan.jamiicfapp.data.network.jcaresponse.PwdResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.DisabilitycaseResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.addDisabiltycaseResponse.DisabilityCaseAddedResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentByIdResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.DonationResponse
-import com.dan.jamiicfapp.data.network.jcaresponse.eventresponse.EventsResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse.FeedbackResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.recordcaseresponse.getrecord.FetchRecordCasesResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.recordcaseresponse.postrecord.RecordCaseResponse
+import com.dan.jamiicfapp.data.network.requestbodys.AddCaseRecord
+import com.dan.jamiicfapp.data.network.requestbodys.AddCaseRecordApprove
+import com.dan.jamiicfapp.data.network.requestbodys.AddDisabilityCase
 import com.dan.jamiicfapp.data.network.requestbodys.RegisterDetails
 import com.google.gson.GsonBuilder
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -18,6 +25,10 @@ import retrofit2.http.*
 
 
 interface JcaApiService {
+
+    /**
+     * Authentication Api
+     */
     @FormUrlEncoded
     @POST("login")
     suspend fun login_Api(
@@ -30,21 +41,59 @@ interface JcaApiService {
     @POST("register")
     suspend fun registerUser(@Body registerDetails: RegisterDetails): Response<AuthResponse>
 
-    @GET("viewpwds")
-    suspend fun viewpwds(): Response<PwdResponse>
+    /**
+     * Disabled Cases Api
+     */
+    @GET("getdisabilitycase")
+    suspend fun viewpwds(): Response<DisabilitycaseResponse>
 
-    @GET("viewEvents")
-    suspend fun viewEvents(): Response<EventsResponse>
+    @Multipart
+    @POST("storedisabilitycase")
+    suspend fun postDisabilityCase(
+        @Part("disability_case") disability_case: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("amount_required") amount_required: RequestBody,
+        @Part image: MultipartBody.Part
+        //@Part("desc") desc: RequestBody,
 
+    ): Response<DisabilityCaseAddedResponse>
+
+
+    /**
+     * Report Case Api
+     */
+    @Headers("Content-Type: application/json")
+    @POST("storeRecordedcase")
+    suspend fun storeRecordedcase(
+        @Body addCaseRecord: AddCaseRecord
+    ): Response<RecordCaseResponse>
+
+    //@FormUrlEncoded
+    @Headers("Content-Type: application/json")
+    @PATCH("approve/{postNumber}")
+    suspend fun updateRecordedcase(
+        @Path("postNumber") recordId: Int,
+        @Body addCaseRecordApprove: AddCaseRecordApprove
+    ): Response<RecordCaseResponse>
+
+    @GET("getRecordedcases")
+    suspend fun getRecordedcases(): Response<FetchRecordCasesResponse>
+
+    /**
+     * Donation Api
+     */
     @FormUrlEncoded
     @POST("donate")
     suspend fun donate(
-        @Field("pwd_id") pwd_id: String,
+        @Field("dcase_foreignid") dcase_foreignid: String,
         @Field("member_community_id") member_community_id: String,
         @Field("phonenumber") phonenumber: String,
         @Field("amount_donated") amount_donated: String
     ): Response<DonationResponse>
 
+    /**
+     * Feedback Api
+     */
     @FormUrlEncoded
     @POST("feedback")
     suspend fun feedbackApi(
@@ -52,6 +101,9 @@ interface JcaApiService {
         @Field("feedback") feedback: String
     ): Response<FeedbackResponse>
 
+    /**
+     * Comment Api
+     */
     @FormUrlEncoded
     @POST("comment")
     suspend fun comment(
@@ -60,14 +112,22 @@ interface JcaApiService {
         @Field("comment") comment: String
     ): Response<CommentResponse>
 
-    @GET("commentID/2")
-    suspend fun getCommentByPwdID(): Response<CommentByIdResponse>
 
+    @FormUrlEncoded
+    @POST("commentID")
+    suspend fun getCommentByPwdID(
+        @Field("pwd_id") pwd_id: String
+    ): Response<CommentByIdResponse>
+
+
+    /**
+     * Working of api request
+     */
     companion object {
         operator fun invoke(networkInterceptor: NetworkInterceptor): JcaApiService {
             val logging = HttpLoggingInterceptor()
             logging.apply {
-                setLevel(HttpLoggingInterceptor.Level.HEADERS)
+                setLevel(HttpLoggingInterceptor.Level.BODY)
 
             }
 
@@ -76,11 +136,9 @@ interface JcaApiService {
                 addInterceptor(logging)
             }.build()
 
-            val gson = GsonBuilder()
-                .setLenient()
-                .create()
+
             val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .baseUrl("http://192.168.43.248/laravel-projects/project3JCA/public/api/")
                 .build()

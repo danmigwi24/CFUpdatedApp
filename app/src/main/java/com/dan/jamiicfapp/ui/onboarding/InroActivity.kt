@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.dan.jamiicfapp.R
 import com.dan.jamiicfapp.data.Introdata
+import com.dan.jamiicfapp.ui.SplashActivity
 import com.dan.jamiicfapp.ui.WelcomeActivity
 import com.dan.jamiicfapp.ui.onboarding.adapter.IntroViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -40,7 +41,7 @@ class InroActivity : AppCompatActivity() {
             applicationContext.getSharedPreferences("firstTime", Context.MODE_PRIVATE)
 
         if (proceedToMainActivity()) {
-            startActivity(Intent(this, WelcomeActivity::class.java))
+            startActivity(Intent(this, SplashActivity::class.java))
             finish()
         }
 
@@ -48,28 +49,28 @@ class InroActivity : AppCompatActivity() {
         introdata.add(
             Introdata(
                 "Jamii CrowdFunding Application",
-                "Help Disabled People Financially",
+                "To make a donation, through mobile money.",
                 R.drawable.disability
             )
         )
         introdata.add(
             Introdata(
                 "Jamii CrowdFunding Application",
-                "Help Disabled People Financially",
+               "To upload information concerning a person with disability",
                 R.drawable.disability
             )
         )
         introdata.add(
             Introdata(
                 "Jamii CrowdFunding Application",
-                "Help Disabled People Financially",
+                " To allow the community member to create accounts",
                 R.drawable.disability
             )
         )
         introdata.add(
             Introdata(
                 "Jamii CrowdFunding Application",
-                "Help Disabled People Financially",
+               "\uF075Provide module where community member can give their feedback",
                 R.drawable.disability
             )
         )
@@ -101,7 +102,7 @@ class InroActivity : AppCompatActivity() {
         })
 
         btn_getStarted.setOnClickListener {
-            startActivity(Intent(this, WelcomeActivity::class.java))
+            startActivity(Intent(this, SplashActivity::class.java))
             saveFirstTimeToPref()
             //finish()
         }

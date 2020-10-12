@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dan.jamiicfapp.R
 import com.dan.jamiicfapp.databinding.ActivityRegisterBinding
+
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModel
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModelFactory
 import com.dan.jamiicfapp.utils.APIException

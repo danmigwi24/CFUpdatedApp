@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_admin">
+
+    <fragment
+        android:id="@+id/nav_admin"
+        android:name="com.dan.jamiicfapp.ui.adminui.ui.admin.AdminFragment"
+        android:label="@string/title_admin"
+        tools:layout="@layout/fragment_homeadmin" />
+
+    <fragment
+        android:id="@+id/nav_donations"
+        android:name="com.dan.jamiicfapp.ui.adminui.ui.donations.DonationsFragment"
+        android:label="@string/title_donation"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_disburse"
+        android:name="com.dan.jamiicfapp.ui.adminui.ui.slideshow.SlideshowFragment"
+        android:label="@string/title_disburse"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_addhomeitem"
+        android:name="com.dan.jamiicfapp.ui.adminui.ui.addnewhomeitem.AddHomeItemFragment"
+        android:label="@string/menu_addnewHomeitem"
+        tools:layout="@layout/fragment_add_home_item" />
+
+</navigation>

@@ -15,13 +15,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dan.jamiicfapp.R
+import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.databinding.ActivityLoginBinding
+import com.dan.jamiicfapp.ui.adminui.AdminActivity
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModel
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModelFactory
 import com.dan.jamiicfapp.ui.jcahome.HomeActivity
 import com.dan.jamiicfapp.utils.APIException
 import com.dan.jamiicfapp.utils.NoInternetException
-import com.dan.jamiicfapp.data.db.preference.SessionManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -52,12 +53,15 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
 
         loginViewModel.getUserVmRoom().observe(this, Observer { user ->
             if (user != null) {
-                Intent(this@LoginActivity, HomeActivity::class.java).apply {
-                    sessionManager.saveUserId(user.id.toString())
-                    sessionManager.savePhoneNumber(user.phonenumber)
-                    //flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+               /* Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(this)
-                }
+                }*/
+                sessionManager.saveUserId(user.id.toString())
+                sessionManager.savePhoneNumber(user.phonenumber)
+                Log.e(
+                    "phonenumber", user.phonenumber
+                )
 
             }
 
@@ -68,6 +72,21 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
             editTextChangedListener()
             Log.e("phn", binding.editTextPhonenumber.text.toString())
             loginUser()
+        }
+
+        binding.buttonLoginadmin.setOnClickListener {
+            val phonenumber = binding.editTextPhonenumber.text.toString()
+            if (phonenumber.isEmpty()) {
+                binding.editTextPhonenumber.error = "Please enter valid number"
+            }
+            val length = binding.editTextPin.text.length
+            if (binding.editTextPin.text.toString().isEmpty() && length != 4) {
+                binding.editTextPin.error = "Please enter valid number"
+            }
+            if (binding.editTextPin.text.toString() == "1234" && binding.editTextPhonenumber.text.toString() == "123456789"
+            ) {
+                startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
+            }
         }
     }
 
@@ -108,7 +127,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
                         progressBar.visibility = View.GONE
                     }
                     sessionManager.savePhoneNumber(
-                        binding.editTextPhonenumber.text.toString().trim()
+                        ccp.selectedCountryCode + binding.editTextPhonenumber.text.toString().trim()
                     )
 
                 } catch (e: APIException) {

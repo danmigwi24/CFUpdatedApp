@@ -12,12 +12,17 @@ import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.databinding.ActivityCommentBinding
 import com.dan.jamiicfapp.ui.commentui.cviewmodel.CommentViewModel
 import com.dan.jamiicfapp.ui.commentui.cviewmodel.CommentViewModelFactory
-import com.dan.jamiicfapp.utils.Coroutines
+import com.dan.jamiicfapp.utils.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
 class CommentActivity : AppCompatActivity(), KodeinAware {
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
+    }
 
     override val kodein by kodein()
     private val factory by instance<CommentViewModelFactory>()
@@ -37,19 +42,42 @@ class CommentActivity : AppCompatActivity(), KodeinAware {
             val transaction = supportFragmentManager.beginTransaction()
             AddcommentFragment().show(transaction, "SOME_TAG")
         }
-
-        Coroutines.main {
-            val liveDataComments = viewModel.getCommentsInVM.await()
-            liveDataComments.observe(this@CommentActivity, Observer {
-                Log.e("HellowInn",it.toString())
-                commentsAdapter = CommentsAdapter(it)
-                binding.recyclerViewComments.apply {
-                    layoutManager = LinearLayoutManager(this@CommentActivity)
-                    setHasFixedSize(true)
-                    adapter = commentsAdapter
+        try {
+            viewModel.getComment()
+            viewModel.getCommentsInVM.observe(this, Observer { comments ->
+                if (comments.isNotEmpty()) {
+                    Log.e("HellowInn", comments.toString())
+                    commentsAdapter = CommentsAdapter(comments)
+                    binding.recyclerViewComments.apply {
+                        layoutManager = LinearLayoutManager(this@CommentActivity)
+                        setHasFixedSize(true)
+                        adapter = commentsAdapter
+                    }
+                } else {
+                    binding.commentsProgressBar.pshow()
                 }
+
             })
+        } catch (e: APIException) {
+            binding.commentsProgressBar.phide()
+            toast(e.message.toString())
+        } catch (e: NoInternetException) {
+            binding.commentsProgressBar.phide()
+            toast(e.message.toString())
         }
+
+        /* Coroutines.main {
+             val liveDataComments = viewModel.getCommentsInVM.await()
+             liveDataComments.observe(this@CommentActivity, Observer {
+                 Log.e("HellowInn", it.toString())
+                 commentsAdapter = CommentsAdapter(it)
+                 binding.recyclerViewComments.apply {
+                     layoutManager = LinearLayoutManager(this@CommentActivity)
+                     setHasFixedSize(true)
+                     adapter = commentsAdapter
+                 }
+             })
+         }*/
 
     }
 }

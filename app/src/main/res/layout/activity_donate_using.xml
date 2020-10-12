@@ -99,7 +99,6 @@
                         android:padding="5dp"
                         android:text="Use Mpesa"
                         android:textColor="@color/text_blue"
-
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -110,11 +109,11 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="100dp"
-android:visibility="invisible"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
+                android:visibility="gone"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -127,8 +126,8 @@ android:visibility="invisible"
                         android:id="@+id/imageDonateMpesa"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/airtel"
                         android:scaleType="centerCrop"
+                        android:src="@drawable/airtel"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -150,11 +149,11 @@ android:visibility="invisible"
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="100dp"
-                android:visibility="invisible"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
+                android:visibility="invisible"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -167,8 +166,8 @@ android:visibility="invisible"
                         android:id="@+id/imagedonatePayPal"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/paypal3"
                         android:scaleType="centerCrop"
+                        android:src="@drawable/paypal3"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

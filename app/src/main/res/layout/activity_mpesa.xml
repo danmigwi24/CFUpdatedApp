@@ -4,104 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/aaaawhatsppbg"
     tools:context=".ui.paymentmode.MpesaActivity">
 
-    <RelativeLayout
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        style="?android:actionBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        tools:context=".darajafirebase.activities.MainActivity">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutphoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
-            style="?android:actionBarStyle"
+        <EditText
+            android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="@string/app_name" />
+            android:hint="Enter your phonenumber"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <RelativeLayout
-            android:id="@+id/accountBalanceLayout"
-            android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutamount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginEnd="32dp"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutphoneNumber">
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/main_toolbar"
-            android:layout_centerHorizontal="true"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/balanceTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="Account balance: "
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@id/balanceTitle"
-                android:layout_toRightOf="@id/balanceTitle"
-                android:textSize="20sp"
-                tools:text="1" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/idlineaarlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <EditText
-                android:id="@+id/phoneNumber"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/et_background"
-                android:hint="phone number"
-                android:inputType="phone"
-                android:padding="10dp"
-                android:text="0798997948"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/amount"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/et_background"
-                android:hint="amount"
-                android:text="10"
-                android:inputType="numberDecimal"
-                android:padding="10dp"
-                android:textSize="14sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/pay"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/donate_btn_bg"
-                android:text="PAY"
-
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
-
-        </LinearLayout>
+            android:hint="Enter your amount"
+            android:inputType="numberDecimal"
+            android:padding="10dp"
+            android:text="10"
+            android:textColor="@color/text_black"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/donate_btn_bg"
+        android:text="Donate"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutamount" />
 
-
-    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:padding="10dp"
+        android:text="Thanks for you support"
+        android:textAlignment="center"
+        android:textColor="@color/text_black"
+        android:textSize="16dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

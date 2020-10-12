@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dan.jamiicfapp.R
-import com.dan.jamiicfapp.data.db.entities.DisabledDetails
+import com.dan.jamiicfapp.data.db.entities.DisabledCaseDetails
 import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.databinding.FragmentHomeBinding
 import com.dan.jamiicfapp.ui.jcahome.adapter.PwdDetailsAdapter
@@ -20,8 +20,7 @@ import com.dan.jamiicfapp.ui.jcahome.listerner.PwdRecyclerviewItemclicked
 import com.dan.jamiicfapp.ui.jcahome.ui.home.homeviewmodel.HomeViewModel
 import com.dan.jamiicfapp.ui.jcahome.ui.home.homeviewmodel.HomeViewModelFactory
 import com.dan.jamiicfapp.ui.paymentmode.DonateUsingActivity
-import com.dan.jamiicfapp.utils.Coroutines
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.dan.jamiicfapp.utils.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -56,18 +55,34 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
         Coroutines.main {
             val pwd = homeViewModel.pwdlist.await()
             pwd.observe(requireActivity(), Observer { detailsofpwd ->
-                Log.e("Detailsofpwd",detailsofpwd.toString())
-                recyclerView.apply {
-                    pwdDetailsAdapter = PwdDetailsAdapter(this@HomeFragment, detailsofpwd) {
-                        val intent = Intent(requireContext(), MoreDetailsPWDSActivity::class.java)
-                        intent.putExtra(INTENT_PARCELABLE_DETAIL_OF_PWD, it)
-                        startActivity(intent)
-                        sessionManager.savePwdId(it.id.toString())
+                binding.progressBarPwd.pshow()
+                Log.e("Detailsofpwd", detailsofpwd.toString())
+                try {
+                    if (detailsofpwd.isNotEmpty()) {
+                        binding.progressBarPwd.phide()
+                        binding.recyclerView.apply {
+                            pwdDetailsAdapter = PwdDetailsAdapter(this@HomeFragment, detailsofpwd) {
+                                val intent =
+                                    Intent(requireContext(), MoreDetailsPWDSActivity::class.java)
+                                intent.putExtra(INTENT_PARCELABLE_DETAIL_OF_PWD, it)
+                                startActivity(intent)
+                                sessionManager.savePwdId(it.disabilitycaseId.toString())
+                            }
+                            layoutManager = LinearLayoutManager(activity)
+                            setHasFixedSize(true)
+                            adapter = pwdDetailsAdapter
+                        }
+                    } else {
+                        binding.progressBarPwd.pshow()
                     }
-                    layoutManager = LinearLayoutManager(activity)
-                    setHasFixedSize(true)
-                    adapter = pwdDetailsAdapter
+                } catch (e: APIException) {
+                    binding.progressBarPwd.phide()
+                    context?.toast(e.message.toString())
+                } catch (e: NoInternetException) {
+                    binding.progressBarPwd.phide()
+                    context?.toast(e.message.toString())
                 }
+
 
             })
         }
@@ -75,7 +90,7 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
 
     }
 
-    override fun OnrecyclerviewItemClicked(view: View, disabledDetails: DisabledDetails) {
+    override fun OnrecyclerviewItemClicked(view: View, disabledDetails: DisabledCaseDetails) {
         when (view.id) {
             R.id.button_donate -> {
                 startActivity(Intent(requireContext(), DonateUsingActivity::class.java))
@@ -84,6 +99,9 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
                 pwdDetailsAdapter
             }
             R.id.textViewReadMore -> {
+                pwdDetailsAdapter
+            }
+            R.id.imagePWD->{
                 pwdDetailsAdapter
             }
         }

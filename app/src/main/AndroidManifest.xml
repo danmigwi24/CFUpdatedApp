@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".KodeinApplication"
@@ -14,39 +16,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.commentui.AddcommentActivity"></activity>
+        <activity android:name=".ui.adminui.ui.admin.MoreAboutARecordActivity"></activity>
+        <activity android:name=".ui.adminui.addcase.AddCaseOfDisabilityActivity" />
+        <activity
+            android:name=".ui.adminui.AdminActivity"
+            android:label="@string/title_activity_admin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.SplashActivity" />
         <activity
             android:name=".ui.commentui.CommentActivity"
             android:label="@string/title_activity_comment"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.jcahome.ui.events.MoreAboutEventsActivity" />
         <activity
             android:name=".ui.auth.RegisterActivity"
             android:parentActivityName=".ui.WelcomeActivity" />
-        <activity android:name=".ui.chief.ChiefActivity">
-
-            <!--
+        <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
-        </activity>
-        <activity android:name=".ui.chief.newpwds.AddPwdActivity">
-
-            <!--
-            <intent-filter>
-
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
+        -->
         <activity android:name=".ui.jcahome.ui.home.MoreDetailsPWDSActivity" />
+
         <activity android:name=".ui.paymentmode.MpesaActivity" />
-        <activity android:name=".ui.paymentmode.Mpesa2Activity" />
         <activity android:name=".ui.paymentmode.DonateUsingActivity" />
         <activity
             android:name=".ui.jcahome.HomeActivity"

@@ -12,12 +12,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dan.jamiicfapp.R
-import com.dan.jamiicfapp.utils.Connectivity
-import com.dan.jamiicfapp.utils.Constants
-import com.dan.jamiicfapp.utils.NotificationUtils
 import com.dan.jamiicfapp.data.db.preference.SessionManager
+import com.dan.jamiicfapp.ui.paymentmode.dviewmodel.MpesaViewModel
+import com.dan.jamiicfapp.ui.paymentmode.dviewmodel.MpesaViewModelProvider
+import com.dan.jamiicfapp.utils.*
+import com.google.gson.JsonParser
 import com.twigafoods.daraja.Daraja
 import com.twigafoods.daraja.DarajaListener
 import com.twigafoods.daraja.model.AccessToken
@@ -25,23 +28,29 @@ import com.twigafoods.daraja.model.LNMExpress
 import com.twigafoods.daraja.model.LNMResult
 import com.twigafoods.daraja.util.Settings
 import kotlinx.android.synthetic.main.activity_mpesa.*
+import kotlinx.coroutines.launch
 import okhttp3.*
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 import java.io.IOException
 
-class MpesaActivity : AppCompatActivity() {
+class MpesaActivity : AppCompatActivity(), KodeinAware {
     private lateinit var daraja: Daraja
     private lateinit var ACCESS_TOKEN: String
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var checkoutId: String
     private lateinit var userToken: String
     private var isProcessing = false
-
     private lateinit var uid: String
-
     private lateinit var sessionManager: SessionManager
+    private lateinit var phonenumber2: String
+
+    override val kodein by kodein()
+    val factory by instance<MpesaViewModelProvider>()
+    private lateinit var viewModel: MpesaViewModel
 
     companion object {
         private val TAG = MpesaActivity::class.java.simpleName
@@ -57,18 +66,24 @@ class MpesaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mpesa)
 
-        sessionManager = SessionManager(this)
         setSupportActionBar(main_toolbar)
+        sessionManager = SessionManager(this)
+        viewModel = ViewModelProvider(this, factory).get(MpesaViewModel::class.java)
 
-
+        phonenumber2 = phoneNumber.setText(sessionManager.fetchPhoneNumber()).toString()
+        Log.e("phone", "${sessionManager.fetchPhoneNumber()}")
         initDaraja()
         initBroadcastReceiver()
 
+
+
         pay.setOnClickListener {
-            if (Connectivity.isConnected(this))
+            if (Connectivity.isConnected(this)) {
                 makePayment()
-            else toast("Please connect to the internet")
+            } else toast("Please connect to the internet")
         }
+
+
     }
 
     private fun initDaraja() {
@@ -76,7 +91,7 @@ class MpesaActivity : AppCompatActivity() {
             DarajaListener<AccessToken> {
             override fun onResult(result: AccessToken) {
                 ACCESS_TOKEN = result.access_token
-                sessionManager.saveAuthToken(result.access_token)
+                sessionManager.saveAuthToken2(result.access_token)
                 Log.e("AccessToken", result.access_token)
             }
 
@@ -89,14 +104,13 @@ class MpesaActivity : AppCompatActivity() {
     private fun initBroadcastReceiver() {
         broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                checkStatus()
-//                if (intent!!.action == Constants.PUSH_NOTIFICATION) {
-//                    if (intent.hasExtra("type")) {
-//                        if (intent.getStringExtra("type") == "topup") {
-//                            checkStatus()
-//                        }
-//                    }
-//                }
+                if (intent!!.action == Constants.PUSH_NOTIFICATION) {
+                    if (intent.hasExtra("type")) {
+                        if (intent.getStringExtra("type") == "topup") {
+                            checkStatus()
+                        }
+                    }
+                }
             }
         }
     }
@@ -119,20 +133,22 @@ class MpesaActivity : AppCompatActivity() {
         }
 
         toast("Please wait...")
-        userToken = sessionManager.fetchAuthToken().toString()
-        Log.e("userToken1", userToken)
+        userToken = sessionManager.fetchAuthToken2().toString()
+        Log.e("userToken", userToken)
 
         daraja.requestMPESAExpress(generateLNMExpress(), object : DarajaListener<LNMResult> {
             override fun onResult(result: LNMResult) {
-                Log.d(javaClass.simpleName, "LNMResult success: ${result.ResponseDescription}")
-                Log.e("userToken2", result.ResponseDescription)
-
+                Log.e("ResponseDescription", result.ResponseDescription)
+                if (result.ResponseDescription == "Success") {
+                    saveInDatabase()
+                } else {
+                    Toast.makeText(this@MpesaActivity, result.CustomerMessage, Toast.LENGTH_SHORT).show();
+                }
                 isProcessing = true
                 checkoutId = result.CheckoutRequestID
             }
 
             override fun onError(error: String?) {
-                Log.d(javaClass.simpleName, "LNMResult error: $error")
                 Log.e("LNMResult error: ", error)
                 isProcessing = false
             }
@@ -175,85 +191,75 @@ class MpesaActivity : AppCompatActivity() {
             .addHeader("content-type", "application/json")
             .build()
 
-        Log.e("LNMP", request.toString())
-        val call = client.newCall(request).execute()
-        Log.e("LNMP", call.body.toString())
-        if (call.isSuccessful){
-            updateBalance()
-        }
-
-        /*  call.enqueue(object : Callback {
-              override fun onResponse(call: Call, response: Response) {
-
-                  if (response.isSuccessful) {
-                      Log.e("MPESA IS READY", response.body.toString())
-                      isProcessing = false
-
-                      val res = response.body!!.string()
-                      Log.e("CONFIRMATION RESPONSE", res)
-                      val jsonObject = JsonParser().parse(res).asJsonObject
-
-                      val resultCode = jsonObject.get("ResultCode").asInt
-
-                      runOnUiThread {
-                          when (resultCode) {
-                              0 -> {
-                                  toast("Payment Successful")
-                                  updateBalance()
-                              }
-                              else -> toast("Payment failed. Please try again")
-                          }
-                      }
-
-                  } else {
-                      Log.e("MPESA ERROR", response.message)
-                      Log.e("MPESA ERROR", response.code.toString())
-                  }
-              }
-
-              override fun onFailure(call: Call, e: IOException) {
-                  Log.e(TAG, e.toString())
-                  isProcessing = false
-              }
-
-
-          })*/
-    }
-
-    private fun updateBalance() {
-        val client = OkHttpClient()
-        val url = Constants.UPDATE_BALANCE_URL.toHttpUrlOrNull()
-        val urlBuilder = url!!.newBuilder()
-
-        urlBuilder.addQueryParameter("uid", uid)
-        urlBuilder.addQueryParameter("checkoutId", checkoutId)
-        urlBuilder.addQueryParameter("time", System.currentTimeMillis().toString())
-        urlBuilder.addQueryParameter("description", "Balance top up")
-        urlBuilder.addQueryParameter("amount", amount.text.toString().trim())
-
-        Log.e("url", url.toString())
-
-        val transactionObject = urlBuilder.build()
-        Log.e("OBJECT", transactionObject.toString())
-
-        val request = Request.Builder().url(transactionObject.toString()).build()
-
         val call = client.newCall(request)
+
         call.enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
+
                 if (response.isSuccessful) {
+                    Log.e("MPESA IS READY", response.body.toString())
+                    isProcessing = false
+
                     val res = response.body!!.string()
-                    Log.e("Update balance res:", res)
-                    clearFields(phoneNumber, amount)
+                    Log.e("CONFIRMATION RESPONSE", res)
+                    val jsonObject = JsonParser().parse(res).asJsonObject
+
+                    val resultCode = jsonObject.get("ResultCode").asInt
+
+                    //Log.e("RESULTCODE", response.body.toString())
+                    runOnUiThread {
+                        when (resultCode) {
+                            0 -> {
+                                toast("Payment Successful")
+                                Log.e("RESULTCODE", response.body.toString())
+                            }
+                            else -> toast("Payment failed. Please try again")
+                        }
+                    }
+
+
+                } else {
+                    Log.e("MPESA ERROR", response.message)
+                    Log.e("MPESA ERROR", response.code.toString())
                 }
             }
 
             override fun onFailure(call: Call, e: IOException) {
                 Log.e(TAG, e.toString())
+                isProcessing = false
             }
 
 
         })
+    }
+
+    private fun saveInDatabase() {
+        lifecycleScope.launch {
+            val pwdId = sessionManager.fetchPwdId()
+            val userId = sessionManager.fetchUserId()
+            Log.e(
+                "ids",
+                "pwd :${sessionManager.fetchPwdId()} user : ${sessionManager.fetchUserId()} "
+            )
+            val usedPhonenumber = phoneNumber.text.toString()
+            val amount = amount.text.toString()
+            try {
+                val response =
+                    viewModel.donatePwdVm(
+                        pwdId.toString(),
+                        userId.toString(),
+                        usedPhonenumber,
+                        amount
+                    )
+                toast(response.message)
+            } catch (e: NoInternetException) {
+                toast(e.message.toString())
+            } catch (e: APIException) {
+                toast(e.message.toString())
+            }
+
+
+        }
     }
 
     private fun validated(vararg views: View): Boolean {

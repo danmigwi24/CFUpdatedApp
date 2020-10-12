@@ -1,6 +1,9 @@
 package com.dan.jamiicfapp.utils
 
+import android.content.ContentResolver
 import android.content.Context
+import android.net.Uri
+import android.provider.OpenableColumns
 import android.text.TextUtils
 import android.view.View
 import android.widget.ProgressBar
@@ -21,5 +24,16 @@ fun ProgressBar.phide() {
  fun String.isEmailValid(): Boolean {
     return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this)
         .matches()
+}
+fun ContentResolver.getFileName(fileUri: Uri): String {
+    var name = ""
+    val returnCursor = this.query(fileUri, null, null, null, null)
+    if (returnCursor != null) {
+        val nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        returnCursor.moveToFirst()
+        name = returnCursor.getString(nameIndex)
+        returnCursor.close()
+    }
+    return name
 }
 

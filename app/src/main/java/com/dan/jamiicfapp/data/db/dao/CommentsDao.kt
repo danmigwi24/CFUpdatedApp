@@ -13,6 +13,6 @@ interface CommentsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsertComment(listofcomments: List<Comment>)
 
-    @Query("SELECT * FROM comment")
+    @Query("SELECT * FROM comment ")
     fun getComment(): LiveData<List<Comment>>
 }

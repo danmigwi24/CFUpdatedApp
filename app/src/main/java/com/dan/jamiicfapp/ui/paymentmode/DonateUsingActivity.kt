@@ -18,7 +18,7 @@ class DonateUsingActivity : AppCompatActivity() {
         setSupportActionBar(toolbar2)
 
         binding.cardMpesaPaymentMethod.setOnClickListener {
-            startActivity(Intent(this, Mpesa2Activity::class.java))
+            startActivity(Intent(this, MpesaActivity::class.java))
         }
     }
 }

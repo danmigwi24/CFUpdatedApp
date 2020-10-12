@@ -5,15 +5,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dan.jamiicfapp.data.db.entities.DisabledDetails
+import com.dan.jamiicfapp.data.db.entities.DisabledCaseDetails
 
 @Dao
 interface PwdDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsertpwd(disabledDetails: List<DisabledDetails>)
+    fun upsertpwd(disabledDetails: List<DisabledCaseDetails>)
 
-    @Query("SELECT * FROM disableddetails")
-    fun getPwd(): LiveData<List<DisabledDetails>>
+    @Query("SELECT * FROM disabledcasedetails")
+    fun getPwd(): LiveData<List<DisabledCaseDetails>>
 
 
 }

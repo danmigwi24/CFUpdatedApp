@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_admin">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_admin"
         android:name="com.dan.jamiicfapp.ui.jcahome.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_events"
-        android:name="com.dan.jamiicfapp.ui.jcahome.ui.events.EventsFragment"
+        android:id="@+id/nav_donations"
+        android:name="com.dan.jamiicfapp.ui.jcahome.ui.recordcase.RecordcaseFragment"
         android:label="@string/title_events"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_recordcase" />
 
     <fragment
-        android:id="@+id/navigation_feedbacks"
+        android:id="@+id/nav_disburse"
         android:name="com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.FeedbacksFragment"
         android:label="@string/title_feedbacks"
         tools:layout="@layout/fragment_feedbacks" />

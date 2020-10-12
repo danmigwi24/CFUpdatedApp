@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/aaaawhatsppbg"
         android:layout_height="match_parent">
-        <!--   android:paddingTop="?attr/actionBarSize"-->
+        <!--   android:padpddingTop="?attr/actionBarSize"-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appToolbar"
             android:layout_width="match_parent"

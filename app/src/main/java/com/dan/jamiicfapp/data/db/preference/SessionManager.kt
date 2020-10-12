@@ -15,7 +15,10 @@ class SessionManager(context: Context) {
         const val PHONENUMBER = "phonenumber"
         const val KEY_SAVED_TIME: String = "time"
         const val KEY_SAVED_TIME2: String = "time"
-        const val PWD_ID: String = "time2"
+        const val KEY_SAVED_TIME3: String = "time"
+        const val PWD_ID: String = "pwd_id"
+        const val USER_ID: String = "user_id"
+        const val RECORDEDCASE_ID: String = "RecordedCaseId"
     }
 
     /**
@@ -42,6 +45,18 @@ class SessionManager(context: Context) {
         return prefs.getString(KEY_SAVED_TIME2, null)
 
     }
+  fun CasessaveTimeStamp(time: String) {
+        val editor = prefs.edit()
+        editor.putString(KEY_SAVED_TIME3, time)
+        editor.apply()
+    }
+
+    fun CasesfetchTimeStamp(): String? {
+        return prefs.getString(KEY_SAVED_TIME3, null)
+
+    }
+
+
 
     /**
      * Function to save Pwd id
@@ -58,6 +73,21 @@ class SessionManager(context: Context) {
         return prefs.getString(PWD_ID, null)
 
     }
+    /**
+     * Function to save RecordedCase id
+     * Function to fetch RecordedCase id
+     */
+
+    fun saveRecordedCaseId(CaseId: Int) {
+        val editor = prefs.edit()
+        editor.putInt(RECORDEDCASE_ID, CaseId)
+        editor.apply()
+    }
+
+    fun fetchRecordedCaseId(): Int? {
+        return prefs.getInt(RECORDEDCASE_ID, 0)
+
+    }
 
     /**
      * Function to save UserId
@@ -66,12 +96,12 @@ class SessionManager(context: Context) {
 
     fun saveUserId(user_id: String) {
         val editor = prefs.edit()
-        editor.putString(PWD_ID, user_id)
+        editor.putString(USER_ID, user_id)
         editor.apply()
     }
 
     fun fetchUserId(): String? {
-        return prefs.getString(PWD_ID, null)
+        return prefs.getString(USER_ID, null)
 
     }
 
