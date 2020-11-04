@@ -69,13 +69,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:padding="5dp"
-                android:text='@{"ksh:"+pwds.amount_required}'
+                android:text='@{"Amount required ksh:"+pwds.amount_required}'
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewNameOfPWD"
-                tools:text="$30,875 of $150,000 raised" />
+                tools:text="Amount Required ksh: 100,000" />
 
             <TextView
                 android:id="@+id/textViewDescription"

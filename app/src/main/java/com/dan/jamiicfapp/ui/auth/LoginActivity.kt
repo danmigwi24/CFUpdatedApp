@@ -53,10 +53,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
 
         loginViewModel.getUserVmRoom().observe(this, Observer { user ->
             if (user != null) {
-               /* Intent(this@LoginActivity, HomeActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(this)
-                }*/
+                /* Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                     startActivity(this)
+                 }*/
                 sessionManager.saveUserId(user.id.toString())
                 sessionManager.savePhoneNumber(user.phonenumber)
                 Log.e(
@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
             loginUser()
         }
 
-        binding.buttonLoginadmin.setOnClickListener {
+        binding.buttonLogin2.setOnClickListener {
             val phonenumber = binding.editTextPhonenumber.text.toString()
             if (phonenumber.isEmpty()) {
                 binding.editTextPhonenumber.error = "Please enter valid number"
@@ -117,6 +117,7 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
                         Intent(this@LoginActivity, HomeActivity::class.java).apply {
                             startActivity(this)
                         }
+                        this@LoginActivity.finish()
                     } else {
                         toast(response.message.toString())
                         Log.e(

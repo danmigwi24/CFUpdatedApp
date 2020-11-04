@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ import com.dan.jamiicfapp.ui.jcahome.ui.recordcase.recordveiwmodel.RecordcaseVie
 import com.dan.jamiicfapp.utils.APIException
 import com.dan.jamiicfapp.utils.Coroutines
 import com.dan.jamiicfapp.utils.NoInternetException
+import com.dan.jamiicfapp.utils.toast
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -96,12 +98,13 @@ class RecordcaseFragment : Fragment(), KodeinAware {
                                 if (response.isSuccessful) {
                                     toast(response.message.toString())
                                     binding.progressBar4.visibility = View.GONE
-                                    startActivity(
-                                        Intent(
-                                            activity,
-                                            HomeActivity::class.java
-                                        )
-                                    )
+//                                    startActivity(
+//                                        Intent(
+//                                            activity,
+//                                            HomeActivity::class.java
+//                                        )
+//                                    )
+                                    alertDialog()
                                 } else {
                                     toast("Please check your details ")
                                     binding.progressBar4.visibility = View.GONE
@@ -128,5 +131,17 @@ class RecordcaseFragment : Fragment(), KodeinAware {
 
     private fun toast(s: String) {
         Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show();
+    }
+
+    private fun alertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Thanks for Donating to JCF")
+        alertDialog.setMessage("Thanks for making this process successful We are proud of you")
+        alertDialog.setPositiveButton(android.R.string.yes) { dialog, which ->
+            context?.toast("Thanks for supporting JCF")
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
+            requireActivity().finish()
+        }
+
     }
 }

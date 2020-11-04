@@ -43,18 +43,6 @@
                         app:subtitleTextColor="#fff"
                         app:title="@string/app_name"
                         app:titleTextColor="@android:color/white" />
-
-                    <!--<de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="8sp"
-                        android:layout_marginEnd="8dp"
-                        android:padding="5dp"
-                        android:src="@drawable/disability"
-                        android:tint="@android:color/white"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />-->
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -74,10 +62,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_Login"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginEnd="5dp"
-                android:background="@null"
+                android:background="@drawable/btn_signin_bg"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#072BF8"
@@ -90,6 +78,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:text="Create an account"
@@ -106,7 +96,8 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:padding="5dp"
+                android:padding="15dp"
+                android:textSize="20dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Jamii crowd funding... help disabled in Naivasha ... help disabled to acsess basic and primary needs"
@@ -131,11 +122,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
-                    android:padding="10dp"
                     android:text="Join JCF family to help disabled people\n through goods and services donations\n around Naivasha Karate area "
                     android:textAlignment="textStart"
                     android:textColor="#FFFFFF"
-                    android:textSize="19dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -166,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="monospace"
                     android:padding="10dp"
                     android:text=" Welcome to JCF"
                     android:textAlignment="center"
@@ -174,24 +165,25 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
 
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/decriptionJCF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="casual"
                     android:padding="10dp"
-                    android:text="Join JCF family to help disabled people\n through goods and services donations\n around Naivasha Karate area "
+                    android:text="JCF family has come up with a program to enable you as a community member to help disabled people\n through goods and services donations\n around Naivasha Karate area,You can also record a disability case that you would like the rest of you commuinty to know and help. "
                     android:textAlignment="center"
                     android:textColor="@color/text_black"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="italic"
                     app:layout_constraintTop_toBottomOf="@id/welcometojcf" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/thirdsection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/secondsection">
@@ -200,6 +192,7 @@
                     android:id="@+id/whyJCF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
                     android:text="WHY JCF?"
                     android:textAlignment="center"
                     android:textColor="@color/text_blue"
@@ -216,7 +209,9 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
-                    android:text="-> Help disabled person who is in of basic and primary needs"
+                    android:fontFamily="casual"
+                    android:textSize="20sp"
+                    android:text="-> Jamii Crowdfunding is a fundraising tool that enables community to help disabled around them through donation to help then access basic and primary needs."
                     android:textAlignment="center"
                     android:textColor="@color/text_black"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -230,8 +225,9 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="-> Help disabled person who is in of basic and primary needs"
+                    android:fontFamily="casual"
+                    android:textSize="20sp"
+                    android:text="-> JCFA is dedicated to improving the lives of people with disabilities through food supply,access medical services, training, education, and public policy and legislative development."
                     android:textAlignment="center"
                     android:textColor="@color/text_black"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -240,7 +236,44 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fourthsection"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/disabledintropic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thirdsection">
 
+                <TextView
+                    android:id="@+id/textViewTitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Your support makes it possible for us to continue to protect and advance lives of people with disabilities (PWD) possible"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_Register3"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/btn_adminlogin_bg"
+                    android:text="Sign in as Admin"
+                    android:textAllCaps="false"
+                    android:textColor="#FFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTitle2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

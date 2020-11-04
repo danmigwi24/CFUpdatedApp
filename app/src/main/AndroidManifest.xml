@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".KodeinApplication"
@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.adminui.ui.admin.MoreAboutARecordActivity"></activity>
+        <activity android:name=".ui.auth.AdminLoginActivity"></activity>
+        <activity android:name=".ui.adminui.ui.admin.MoreAboutARecordActivity" />
         <activity android:name=".ui.adminui.addcase.AddCaseOfDisabilityActivity" />
         <activity
             android:name=".ui.adminui.AdminActivity"
@@ -38,7 +39,6 @@
             </intent-filter>
         -->
         <activity android:name=".ui.jcahome.ui.home.MoreDetailsPWDSActivity" />
-
         <activity android:name=".ui.paymentmode.MpesaActivity" />
         <activity android:name=".ui.paymentmode.DonateUsingActivity" />
         <activity

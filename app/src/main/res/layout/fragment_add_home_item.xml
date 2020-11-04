@@ -67,10 +67,14 @@
                     android:id="@+id/editTextdescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:text="This is to help disabled person who is not able to buy medicine to by medicine"
-                    android:hint="Enter disability description"
-                    android:inputType="textPersonName" />
+                    android:gravity="left|top"
+                    android:hint="Description of Disability case"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/text_black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -117,7 +121,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/disability"
+                android:src="@drawable/imagesupload"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview" />

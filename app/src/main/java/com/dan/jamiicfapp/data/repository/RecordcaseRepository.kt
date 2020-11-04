@@ -91,7 +91,7 @@ class RecordcaseRepository(
 
     private fun isFetchNeeded(savedAt: LocalDateTime): Boolean {
         //return true
-        return ChronoUnit.HOURS.between(savedAt, LocalDateTime.now()) > MINIMUM_INTERVAL
+        return ChronoUnit.SECONDS.between(savedAt, LocalDateTime.now()) > MINIMUM_INTERVAL
     }
 
 

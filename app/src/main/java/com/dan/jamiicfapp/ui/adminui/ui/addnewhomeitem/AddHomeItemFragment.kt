@@ -94,10 +94,13 @@ class AddHomeItemFragment : Fragment(), KodeinAware {
 
             addCase()
 
+            binding.progressBarAddDataToDisabilityCase.visibility =
+                View.GONE
             binding.editTextdisabilityCase.setText("")
             binding.editTextdescription.setText("")
             binding.editTextamountRequired.setText("")
             binding.imageViewDisability.setImageDrawable(null)
+            binding.imageViewDisability.setBackgroundResource(R.drawable.imagesupload)
 
             Toast.makeText(
                 requireContext(),
@@ -106,6 +109,10 @@ class AddHomeItemFragment : Fragment(), KodeinAware {
         }
 
         builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            binding.progressBarAddDataToDisabilityCase.visibility =
+                View.GONE
+
             Toast.makeText(
                 requireContext(),
                 android.R.string.no, Toast.LENGTH_SHORT

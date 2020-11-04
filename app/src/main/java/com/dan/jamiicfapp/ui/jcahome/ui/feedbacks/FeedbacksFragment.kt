@@ -1,16 +1,19 @@
 package com.dan.jamiicfapp.ui.jcahome.ui.feedbacks
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dan.jamiicfapp.R
 import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.databinding.FragmentFeedbacksBinding
+import com.dan.jamiicfapp.ui.jcahome.HomeActivity
 import com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.feedbackviewmodel.FeedbackViewModelFactory
 import com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.feedbackviewmodel.FeedbacksViewModel
 import com.dan.jamiicfapp.utils.*
@@ -52,7 +55,7 @@ class FeedbacksFragment : Fragment(), KodeinAware {
         binding.buttonSendFeedBack.setOnClickListener {
             if (binding.editTextFeedback.text.toString().isEmpty()) {
                 binding.editTextFeedback.error = "Please enter feedback"
-            }else{
+            } else {
                 Coroutines.main {
                     binding.progressBar2.pshow()
                     try {
@@ -61,6 +64,7 @@ class FeedbacksFragment : Fragment(), KodeinAware {
                                 membersID.toString(),
                                 binding.editTextFeedback.text.toString()
                             )
+                        alertDialog()
                         Log.e("feedback", res.toString())
                         binding.progressBar2.phide()
                         context?.toast(res.message)
@@ -77,6 +81,18 @@ class FeedbacksFragment : Fragment(), KodeinAware {
 
         }
 
+
+    }
+
+    private fun alertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Thanks for Donating to JCF")
+        alertDialog.setMessage("Thanks for making this process successful We are proud of you")
+        alertDialog.setPositiveButton(android.R.string.yes) { dialog, which ->
+            context?.toast("Thanks for supporting JCF")
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
+            requireActivity().finish()
+        }
 
     }
 }

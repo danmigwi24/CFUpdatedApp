@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/aaaawhatsppbg"
-        tools:context=".ui.auth.LoginActivity">
+        tools:context=".ui.auth.AdminLoginActivity">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
@@ -20,6 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textViewLoginDetalis1"
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:layout_marginEnd="32dp"
             android:fontFamily="monospace"
             android:padding="10dp"
-            android:text="WELCOME"
+            android:text="AREA CHIEF "
             android:textAlignment="center"
             android:textColor="@color/text_black"
             android:textSize="20dp"
@@ -43,18 +44,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:textStyle="bold"
-            android:padding="10dp"
             android:fontFamily="cursive"
+            android:padding="10dp"
             android:text="Please enter your \nPhoneNumber and Password to login"
             android:textAlignment="center"
             android:textColor="@color/text_black"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewLoginDetalis1" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
@@ -92,8 +94,8 @@
                     android:id="@+id/edit_text_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter phonenumber eg 71234**78"
-                    android:text=""
+                    android:hint="Enter phonenumber"
+                    android:text="123456789"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,8 +109,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/button_forgot_pin"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_loginadmin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:passwordToggleEnabled="true">
@@ -118,45 +120,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Password"
-                android:text=""
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="1234" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_forgot_pin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:visibility="invisible"
-            android:background="@null"
-            android:text="Forgot Pin?"
-            android:textColor="#0A2CE6"
-            app:layout_constraintBottom_toTopOf="@+id/button_login"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2" />
+
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_login2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/btn_login_bg"
-            android:text="Login"
-            android:visibility="gone"
-            android:textColor="@android:color/white"
-           app:layout_constraintBottom_toTopOf="@id/button_login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_login"
+            android:id="@+id/button_loginadmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/btn_register_bg"
-            android:text="Login "
+            android:text="Login as Admin"
             android:textColor="#E80955"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

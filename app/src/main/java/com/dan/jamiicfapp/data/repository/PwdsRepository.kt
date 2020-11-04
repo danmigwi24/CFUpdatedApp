@@ -22,7 +22,7 @@ class PwdsRepository(
     private val sessionManager: SessionManager
 ) : SafeApiRequest() {
     //private val MINIMUM_INTERVAL = 0.0333333
-    private val MINIMUM_INTERVAL = 2
+    private val MINIMUM_INTERVAL = 0.5
 
     private val pwds = MutableLiveData<List<DisabledCaseDetails>>()
 

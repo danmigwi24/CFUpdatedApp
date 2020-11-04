@@ -2,9 +2,9 @@ package com.dan.jamiicfapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.dan.jamiicfapp.R
+import com.dan.jamiicfapp.ui.auth.AdminLoginActivity
 import com.dan.jamiicfapp.ui.auth.LoginActivity
 import com.dan.jamiicfapp.ui.auth.RegisterActivity
 import kotlinx.android.synthetic.main.activity_welcome.*
@@ -31,6 +31,9 @@ class WelcomeActivity : AppCompatActivity() {
         }
         button_Register2.setOnClickListener {
             btnRegister()
+        }
+        button_Register3.setOnClickListener {
+            startActivity(Intent(this, AdminLoginActivity::class.java))
         }
     }
 

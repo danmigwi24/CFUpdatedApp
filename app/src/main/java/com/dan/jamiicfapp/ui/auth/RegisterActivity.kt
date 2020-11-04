@@ -13,13 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dan.jamiicfapp.R
 import com.dan.jamiicfapp.databinding.ActivityRegisterBinding
-
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModel
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModelFactory
 import com.dan.jamiicfapp.utils.APIException
 import com.dan.jamiicfapp.utils.NoInternetException
 import com.dan.jamiicfapp.utils.isEmailValid
-import com.dan.jamiicfapp.utils.toast
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -57,7 +55,8 @@ class RegisterActivity : AppCompatActivity(), KodeinAware {
 
         val surname = binding.editTextSurname.text.toString().trim()
         val name = binding.editTextName.text.toString().trim()
-        val phonenumber = binding.ccp.selectedCountryCode + binding.editTextPhonenumber.text.toString()
+        val phonenumber =
+            binding.ccp.selectedCountryCode + binding.editTextPhonenumber.text.toString()
         val address = binding.editTextAddress.text.toString().trim()
         val email = binding.editTextEmail.text.toString().trim()
         val password = binding.editTextPassword.text.toString()
@@ -93,6 +92,7 @@ class RegisterActivity : AppCompatActivity(), KodeinAware {
                         Intent(this@RegisterActivity, LoginActivity::class.java).apply {
                             startActivity(this)
                         }
+                        this@RegisterActivity.finish()
                         toast(authResponse.message.toString())
 
                         Log.e("YesisSuccessful", authResponse.message.toString())

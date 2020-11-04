@@ -2,7 +2,6 @@ package com.dan.jamiicfapp.ui.adminui.ui.admin
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +10,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dan.jamiicfapp.R
 import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.data.network.jcaresponse.recordcaseresponse.getrecord.RecordedCase
 import com.dan.jamiicfapp.databinding.FragmentHomeadminBinding
-import com.dan.jamiicfapp.ui.adminui.AdminActivity
 import com.dan.jamiicfapp.ui.jcahome.ui.recordcase.recordveiwmodel.RecordcaseViewModel
 import com.dan.jamiicfapp.ui.jcahome.ui.recordcase.recordveiwmodel.RecordcaseViewModelFactory
 import com.dan.jamiicfapp.utils.*
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -60,30 +56,40 @@ class AdminFragment : Fragment(), KodeinAware, CaseRecordRecyclerviewItemclicked
                 try {
                     if (listOfRecordedCase.isNotEmpty()) {
                         binding.progressBarRecordedcases.phide()
+                        binding.textViewEmpty.visibility = View.GONE
+                        recordedCaseAdapter =
+                            RecordedCaseAdapter(this@AdminFragment, listOfRecordedCase) {
+                                val intent =
+                                    Intent(
+                                        requireContext(),
+                                        MoreAboutARecordActivity::class.java
+                                    )
+                                intent.putExtra(INTENT_PARCELABLE_RECORD_DETAILS, it)
+                                startActivity(intent)
+                                sessionManager.saveRecordedCaseId(it.id)
+                            }
                         binding.reclyerviewRecords.apply {
-                            recordedCaseAdapter =
-                                RecordedCaseAdapter(this@AdminFragment, listOfRecordedCase) {
-                                    val intent =
-                                        Intent(
-                                            requireContext(),
-                                            MoreAboutARecordActivity::class.java
-                                        )
-                                    intent.putExtra(INTENT_PARCELABLE_RECORD_DETAILS, it)
-                                    startActivity(intent)
-                                    sessionManager.saveRecordedCaseId(it.id)
-                                }
                             layoutManager = LinearLayoutManager(activity)
                             setHasFixedSize(true)
                             adapter = recordedCaseAdapter
+
+
                         }
+
                     } else {
                         binding.progressBarRecordedcases.pshow()
+
+                        binding.textViewEmpty.visibility = View.VISIBLE
+                        binding.textViewEmpty.text = "No new cases recorded on Disability"
+
                     }
                 } catch (e: APIException) {
                     binding.progressBarRecordedcases.phide()
+                    binding.textViewEmpty.visibility = View.GONE
                     context?.toast(e.message.toString())
                 } catch (e: NoInternetException) {
                     binding.progressBarRecordedcases.phide()
+                    binding.textViewEmpty.visibility = View.GONE
                     context?.toast(e.message.toString())
                 }
             })
@@ -147,6 +153,6 @@ class AdminFragment : Fragment(), KodeinAware, CaseRecordRecyclerviewItemclicked
     }
 
     private fun toast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }
