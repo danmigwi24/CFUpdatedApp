@@ -104,7 +104,7 @@ class InroActivity : AppCompatActivity() {
         btn_getStarted.setOnClickListener {
             startActivity(Intent(this, SplashActivity::class.java))
             saveFirstTimeToPref()
-            //finish()
+            finish()
         }
     }
 

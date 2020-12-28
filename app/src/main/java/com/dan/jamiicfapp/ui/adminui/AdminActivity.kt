@@ -1,21 +1,22 @@
 package com.dan.jamiicfapp.ui.adminui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.dan.jamiicfapp.R
+import com.dan.jamiicfapp.ui.WelcomeActivity
+import com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.fetchfeedback.FetchFeedbackActivity
+import com.google.android.material.navigation.NavigationView
 
 class AdminActivity : AppCompatActivity() {
 
@@ -39,7 +40,7 @@ class AdminActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_admin,R.id.nav_addhomeitem, R.id.nav_donations, R.id.nav_disburse
+                R.id.nav_disabilities, R.id.nav_admin, R.id.nav_addhomeitem, R.id.nav_donations
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -53,9 +54,16 @@ class AdminActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_settings -> {
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+        when (item.itemId) {
+            R.id.action_logout -> {
+
+                startActivity(Intent(this, WelcomeActivity::class.java))
+                this.finish()
+                Toast.makeText(this, "Thank you for being part of Our process", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            R.id.action_Feedback -> {
+                startActivity(Intent(this, FetchFeedbackActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)

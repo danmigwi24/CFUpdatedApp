@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.auth.AdminLoginActivity"></activity>
+        <activity android:name=".ui.adminui.ui.cruddisability.EditDisabilityActivity"></activity>
+        <activity android:name=".ui.auth.AdminLoginActivity" />
+        <activity android:name=".ui.jcahome.ui.feedbacks.fetchfeedback.FetchFeedbackActivity"
+            android:parentActivityName=".ui.jcahome.HomeActivity"/>
         <activity android:name=".ui.adminui.ui.admin.MoreAboutARecordActivity" />
         <activity android:name=".ui.adminui.addcase.AddCaseOfDisabilityActivity" />
         <activity

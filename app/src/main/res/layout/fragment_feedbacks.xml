@@ -35,7 +35,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:subtitle="Help Disabled in community"
                     app:subtitleTextColor="#fff"
-                    app:title="Dan de dev"
+                    app:title="Feedback"
                     app:titleTextColor="@android:color/white" />
 
                 <!--<de.hdodenhof.circleimageview.CircleImageView
@@ -59,7 +59,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Welcome to JAMII CROWDFUNDING \n You can report disability case around Naivasha,Karate area\n  "
+            android:text="Welcome to JAMII CROWDFUNDING \n Give you feedback concerning this application  "
             android:textAlignment="center"
             android:textColor="@color/text_black"
             android:textSize="20dp"
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|top"
-                android:hint="Write your comment.."
+                android:hint="Write your feedback.."
                 android:inputType="textMultiLine"
                 android:lines="8"
                 android:maxLines="10"

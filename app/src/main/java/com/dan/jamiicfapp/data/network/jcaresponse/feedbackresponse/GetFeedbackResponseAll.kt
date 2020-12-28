@@ -1,13 +1,12 @@
-package com.dan.jamiicfapp.data.network.jcaresponse.commentresponse
-
+package com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse
 
 import com.google.gson.annotations.SerializedName
 
-data class CommentByIdResponse(
+data class GetFeedbackResponseAll(
     @SerializedName("isSuccessful")
     val isSuccessful: Boolean,
     @SerializedName("message")
     val message: String,
-    @SerializedName("comment")
-    val comment: List<Comment>?
+    @SerializedName("feedback")
+    val feedback:  List<Feedback>?
 )

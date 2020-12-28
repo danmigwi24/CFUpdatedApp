@@ -3,7 +3,7 @@ package com.dan.jamiicfapp.ui.commentui.cviewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dan.jamiicfapp.data.db.entities.Comment
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment
 import com.dan.jamiicfapp.data.repository.CommentRepository
 import com.dan.jamiicfapp.utils.Coroutines
 import kotlinx.coroutines.Dispatchers

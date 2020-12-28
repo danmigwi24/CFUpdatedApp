@@ -104,7 +104,11 @@ class RecordcaseFragment : Fragment(), KodeinAware {
 //                                            HomeActivity::class.java
 //                                        )
 //                                    )
-                                    alertDialog()
+                                    binding.editTextCaseName.setText("")
+                                    binding.editTextDescription.setText("")
+                                    binding.editTextLocation.setText("")
+                                    binding.editTextDisabledName.setText("")
+                                    binding.editTextTypeOfDisability.setText("")
                                 } else {
                                     toast("Please check your details ")
                                     binding.progressBar4.visibility = View.GONE

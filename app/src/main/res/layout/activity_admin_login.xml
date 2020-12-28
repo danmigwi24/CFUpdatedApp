@@ -69,17 +69,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                app:ccp_defaultNameCode="KE"
-                app:ccp_showNameCode="true"
-                app:ccp_textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -87,16 +76,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ccp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
                     android:id="@+id/edit_text_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter phonenumber"
-                    android:text="123456789"
-                    android:inputType="phone" />
+                    android:hint="Enter Username"
+                    android:inputType="text"
+                    android:text="admin" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -118,10 +107,11 @@
             <EditText
                 android:id="@+id/editText_Pin"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"
                 android:hint="Enter Password"
                 android:singleLine="true"
-                android:text="1234" />
+                android:text="admin" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -45,7 +45,7 @@ class MoreAboutARecordActivity : AppCompatActivity(), KodeinAware {
         val detail =
             intent.getParcelableExtra<RecordedCase>(AdminFragment.INTENT_PARCELABLE_RECORD_DETAILS)
 
-        bindingImpl.textViewdisabilityCase.text = "DISABILITY CASE: ${detail.disabilityCase} "
+        bindingImpl.textViewdisabilityCase.text = "CHALLENGES FACED BY DISABLED PERSON: \n ${detail.disabilityCase} "
         bindingImpl.textViewDescription.text = "DESCRIPTION: ${detail.description}"
         bindingImpl.textViewdisabledPersonName.text =
             "DISABLED PERSON NAME: ${detail.disabledPersonName}"

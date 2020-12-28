@@ -24,7 +24,7 @@ class AdminLoginActivity : AppCompatActivity() {
             if (binding.editTextPin.text.toString().isEmpty() && length != 4) {
                 binding.editTextPin.error = "Please enter valid number"
             }
-            if (binding.editTextPin.text.toString() == "1234" && binding.editTextPhonenumber.text.toString() == "123456789"
+            if (binding.editTextPin.text.toString() == "admin" && binding.editTextPhonenumber.text.toString() == "admin"
             ) {
                 startActivity(Intent(this, AdminActivity::class.java))
             }

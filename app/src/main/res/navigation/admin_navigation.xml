@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_admin">
+    app:startDestination="@id/nav_disabilities">
 
     <fragment
         android:id="@+id/nav_admin"
@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_disburse"
-        android:name="com.dan.jamiicfapp.ui.adminui.ui.slideshow.SlideshowFragment"
-        android:label="@string/title_disburse"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_disabilities"
+        android:name="com.dan.jamiicfapp.ui.adminui.ui.cruddisability.CrudDisabilityFragment"
+        android:label="@string/title_disabilities"
+        tools:layout="@layout/fragment_cruddisability" />
     <fragment
         android:id="@+id/nav_addhomeitem"
         android:name="com.dan.jamiicfapp.ui.adminui.ui.addnewhomeitem.AddHomeItemFragment"

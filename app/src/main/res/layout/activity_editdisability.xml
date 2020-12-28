@@ -12,7 +12,7 @@
             android:id="@+id/layout_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.adminui.ui.addnewhomeitem.AddHomeItemFragment">
+            tools:context=".ui.adminui.ui.cruddisability.EditDisabilityActivity">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textviewTitleAddHomeItem"
@@ -21,7 +21,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="Add A New Challenge faced by Disabled person"
+                android:text="Add A New Challenges faced by Disabled person"
                 android:textAlignment="center"
                 android:textColor="#0B2EF1"
                 android:textSize="18sp"
@@ -46,8 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:text="Clinic problems"
-                    android:hint="Enter new Disability case"
+                    android:text=""
+                    android:hint="New Challenge faced by Disabled person"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,13 +140,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageViewDisability" />
 
             <Button
-                android:id="@+id/button_upload"
+                android:id="@+id/button_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="Upload Image"
+                android:textAllCaps="false"
+                android:text="Update Disability case"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/progressBarImageUplaod" />

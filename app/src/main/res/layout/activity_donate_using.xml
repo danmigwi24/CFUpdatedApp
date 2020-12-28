@@ -34,7 +34,7 @@
                     android:theme="?attr/actionBarTheme"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:subtitle="Donate for a Disabled in community"
+                    app:subtitle="Donate for a disabled person in community"
                     app:subtitleTextColor="#fff"
                     app:title="Donate"
                     app:titleMarginStart="20dp"
@@ -58,11 +58,12 @@
             app:layout_constraintTop_toBottomOf="@id/appToolbar" />
 
         <GridLayout
+            android:id="@+id/gridLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:columnCount="1"
-            android:rowCount="3"
+            android:columnCount="3"
+            android:rowCount="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView">
@@ -113,7 +114,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
-                android:visibility="gone"
+
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -128,6 +129,7 @@
                         android:layout_height="80dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/airtel"
+                        android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -138,8 +140,8 @@
                         android:padding="5dp"
                         android:text="Use Airtel"
                         android:textColor="@color/text_blue"
-
                         android:textStyle="bold"
+                        android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/imageDonateMpesa" />
@@ -148,12 +150,12 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:visibility="gone"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
-                android:visibility="invisible"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -168,6 +170,7 @@
                         android:layout_height="80dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/paypal3"
+                        android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -179,12 +182,96 @@
                         android:text="Use Paypal"
                         android:textColor="@color/text_blue"
                         android:textStyle="bold"
+                        android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/imagedonatePayPal" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/textViewGoods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#13D10D"
+            android:padding="5dp"
+            android:visibility="invisible"
+            android:text="   Send Money Using...."
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gridLayout1" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:columnCount="3"
+            android:rowCount="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewGoods">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imagedonateGoods"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="center"
+                        android:visibility="invisible"
+                        android:src="@drawable/disabledintropic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Use Paypal"
+                        android:textColor="@color/text_blue"
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imagedonateGoods" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </GridLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

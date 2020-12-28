@@ -21,7 +21,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:padding="5dp"
-            android:text="Welcome,Record Disability Case within Naivasha"
+            android:text="Welcome,Record a Challenge faced by Disabled person within Naivasha"
             android:textAlignment="center"
             android:textColor="@color/text_black"
             android:textSize="20sp"
@@ -46,7 +46,7 @@
                 android:id="@+id/editText_CaseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Disability case eg Lack of food"
+                android:hint="Challenge faced eg Lack of food"
                 android:singleLine="true"
                 android:text="" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -142,7 +142,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/btn_register_bg"
-            android:text="Add Disability Case"
+            android:text="Record Disability Case"
             android:textColor="#E80955"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

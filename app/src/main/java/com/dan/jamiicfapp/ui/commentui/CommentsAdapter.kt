@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dan.jamiicfapp.R
-import com.dan.jamiicfapp.data.db.entities.Comment
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment
 import com.dan.jamiicfapp.databinding.RecyclerCommentsBinding
 
 

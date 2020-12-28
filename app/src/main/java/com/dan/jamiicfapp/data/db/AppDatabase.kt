@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dan.jamiicfapp.data.db.dao.*
-import com.dan.jamiicfapp.data.db.entities.Comment
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment
 import com.dan.jamiicfapp.data.db.entities.DisabledCaseDetails
 import com.dan.jamiicfapp.data.db.entities.JcaEvent
 import com.dan.jamiicfapp.data.db.entities.User

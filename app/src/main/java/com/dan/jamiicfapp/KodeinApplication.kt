@@ -6,11 +6,12 @@ import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.data.network.JcaApiService
 import com.dan.jamiicfapp.data.network.NetworkInterceptor
 import com.dan.jamiicfapp.data.repository.*
+import com.dan.jamiicfapp.ui.adminui.ui.cruddisability.viewmodel.CrudDisabilityViewModelFactory
 import com.dan.jamiicfapp.ui.auth.viewmodel.AuthViewModelFactory
 import com.dan.jamiicfapp.ui.commentui.cviewmodel.CommentViewModelFactory
-import com.dan.jamiicfapp.ui.jcahome.ui.recordcase.recordveiwmodel.RecordcaseViewModelFactory
 import com.dan.jamiicfapp.ui.jcahome.ui.feedbacks.feedbackviewmodel.FeedbackViewModelFactory
 import com.dan.jamiicfapp.ui.jcahome.ui.home.homeviewmodel.HomeViewModelFactory
+import com.dan.jamiicfapp.ui.jcahome.ui.recordcase.recordveiwmodel.RecordcaseViewModelFactory
 import com.dan.jamiicfapp.ui.paymentmode.dviewmodel.MpesaViewModelProvider
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -48,7 +49,7 @@ class KodeinApplication : Application(), KodeinAware {
         bind() from provider { MpesaViewModelProvider(instance()) }
 
         //Recordcase
-        bind() from singleton { RecordcaseRepository(instance(),instance(),instance()) }
+        bind() from singleton { RecordcaseRepository(instance(), instance(), instance()) }
         bind() from provider {
             RecordcaseViewModelFactory(
                 instance()
@@ -62,6 +63,10 @@ class KodeinApplication : Application(), KodeinAware {
         //Comment
         bind() from singleton { CommentRepository(instance(), instance(), instance()) }
         bind() from provider { CommentViewModelFactory(instance()) }
+
+        //Edit
+
+        bind() from provider { CrudDisabilityViewModelFactory(instance()) }
 
     }
 }

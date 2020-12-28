@@ -1,4 +1,4 @@
-package com.dan.jamiicfapp.data.db.entities
+package com.dan.jamiicfapp.data.network.jcaresponse.commentresponse
 
 
 import androidx.room.Entity

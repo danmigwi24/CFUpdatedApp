@@ -7,7 +7,7 @@ data class Feedback(
     @SerializedName("member_community_id")
     val memberCommunityId: String,
     @SerializedName("feedback")
-    val feedback: String,
+    val feedback: String?,
     @SerializedName("updated_at")
     val updatedAt: String,
     @SerializedName("created_at")

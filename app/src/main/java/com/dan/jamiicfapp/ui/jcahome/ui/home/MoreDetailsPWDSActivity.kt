@@ -39,6 +39,7 @@ class MoreDetailsPWDSActivity : AppCompatActivity() {
         sessionManager.savePwdId(detailOfPWD.disabilitycaseId.toString())
 
         binding.buttonDonate.setOnClickListener {
+            sessionManager.savePwdId(detailOfPWD.disabilitycaseId.toString())
             startActivity(Intent(this, DonateUsingActivity::class.java))
         }
         binding.buttonSendComment.setOnClickListener {

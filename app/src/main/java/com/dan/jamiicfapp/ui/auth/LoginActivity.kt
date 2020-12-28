@@ -53,10 +53,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
 
         loginViewModel.getUserVmRoom().observe(this, Observer { user ->
             if (user != null) {
-                /* Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                 Intent(this@LoginActivity, HomeActivity::class.java).apply {
                      flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                      startActivity(this)
-                 }*/
+                 }
                 sessionManager.saveUserId(user.id.toString())
                 sessionManager.savePhoneNumber(user.phonenumber)
                 Log.e(

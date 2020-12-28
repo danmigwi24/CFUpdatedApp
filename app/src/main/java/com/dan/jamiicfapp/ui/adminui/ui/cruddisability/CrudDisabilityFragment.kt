@@ -1,4 +1,4 @@
-package com.dan.jamiicfapp.ui.jcahome.ui.home
+package com.dan.jamiicfapp.ui.adminui.ui.cruddisability
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,9 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dan.jamiicfapp.R
 import com.dan.jamiicfapp.data.db.entities.DisabledCaseDetails
 import com.dan.jamiicfapp.data.db.preference.SessionManager
+import com.dan.jamiicfapp.databinding.FragmentCruddisabilityBinding
 import com.dan.jamiicfapp.databinding.FragmentHomeBinding
+import com.dan.jamiicfapp.ui.adminui.ui.cruddisability.adapter.AllDisabilitycaseAdapter
+import com.dan.jamiicfapp.ui.adminui.ui.cruddisability.viewmodel.CrudDisabilityViewModel
+import com.dan.jamiicfapp.ui.adminui.ui.cruddisability.viewmodel.CrudDisabilityViewModelFactory
+import com.dan.jamiicfapp.ui.adminui.ui.donations.DonationsFragment
 import com.dan.jamiicfapp.ui.jcahome.adapter.PwdDetailsAdapter
 import com.dan.jamiicfapp.ui.jcahome.listerner.PwdRecyclerviewItemclicked
+import com.dan.jamiicfapp.ui.jcahome.ui.home.MoreDetailsPWDSActivity
 import com.dan.jamiicfapp.ui.jcahome.ui.home.homeviewmodel.HomeViewModel
 import com.dan.jamiicfapp.ui.jcahome.ui.home.homeviewmodel.HomeViewModelFactory
 import com.dan.jamiicfapp.ui.paymentmode.DonateUsingActivity
@@ -25,16 +31,15 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-
-class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var homeViewModel: HomeViewModel
-    private lateinit var pwdDetailsAdapter: PwdDetailsAdapter
+class CrudDisabilityFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
+    private lateinit var binding: FragmentCruddisabilityBinding
+    private lateinit var crudDisabilityViewModel: CrudDisabilityViewModel
+    private lateinit var allDisabilitycaseAdapter: AllDisabilitycaseAdapter
     private lateinit var sessionManager: SessionManager
 
 
     override val kodein by kodein()
-    val factory by instance<HomeViewModelFactory>()
+    val factory by instance<CrudDisabilityViewModelFactory>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,34 +47,40 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
         savedInstanceState: Bundle?
     ): View? {
         sessionManager = SessionManager(requireContext())
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cruddisability, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeViewModel =
-            ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+
+        crudDisabilityViewModel =
+            ViewModelProvider(this, factory).get(CrudDisabilityViewModel::class.java)
 
         Coroutines.main {
-            val pwd = homeViewModel.pwdlist.await()
+            val pwd = crudDisabilityViewModel.pwdlist.await()
             pwd.observe(requireActivity(), Observer { detailsofpwd ->
                 binding.progressBarPwd.pshow()
-                Log.e("Detailsofpwd", detailsofpwd.toString())
+                Log.e("DISABILITY_CASE", detailsofpwd.toString())
                 try {
                     if (detailsofpwd.isNotEmpty()) {
                         binding.progressBarPwd.phide()
                         binding.recyclerView.apply {
-                            pwdDetailsAdapter = PwdDetailsAdapter(this@HomeFragment, detailsofpwd) {
-                                val intent =
-                                    Intent(requireContext(), MoreDetailsPWDSActivity::class.java)
-                                intent.putExtra(INTENT_PARCELABLE_DETAIL_OF_PWD, it)
-                                startActivity(intent)
-                            }
+                            allDisabilitycaseAdapter =
+                                AllDisabilitycaseAdapter(this@CrudDisabilityFragment, detailsofpwd) {
+                                    val intent =
+                                        Intent(
+                                            requireContext(),
+                                            EditDisabilityActivity::class.java
+                                        )
+                                    intent.putExtra(INTENT_PARCELABLE_CRUD, it)
+                                    startActivity(intent)
+                                    sessionManager.saveDisabilityCaseId(it.disabilitycaseId)
+                                }
                             layoutManager = LinearLayoutManager(activity)
                             setHasFixedSize(true)
-                            adapter = pwdDetailsAdapter
+                            adapter = allDisabilitycaseAdapter
                         }
                     } else {
                         binding.progressBarPwd.pshow()
@@ -91,26 +102,18 @@ class HomeFragment : Fragment(), KodeinAware, PwdRecyclerviewItemclicked {
 
     override fun OnrecyclerviewItemClicked(view: View, disabledDetails: DisabledCaseDetails) {
         when (view.id) {
-            R.id.button_donate -> {
-                sessionManager.savePwdId(disabledDetails.disabilitycaseId.toString())
-                startActivity(Intent(requireContext(), DonateUsingActivity::class.java))
+            R.id.button_edit_disability -> {
+                allDisabilitycaseAdapter
+                Log.e("id",sessionManager.fetchDisabilityCaseId().toString())
+                //startActivity(Intent(requireContext(), EditDisabilityActivity::class.java))
+            }
 
-            }
-            R.id.textViewNameOfPWD -> {
-                pwdDetailsAdapter
-            }
-            R.id.textViewReadMore -> {
-                pwdDetailsAdapter
-            }
-            R.id.imagePWD->{
-                pwdDetailsAdapter
-            }
         }
     }
 
     companion object {
-        const val INTENT_PARCELABLE_DETAIL_OF_PWD = "INTENT_PARCELABLE"
+        const val INTENT_PARCELABLE_CRUD = "INTENT_PARCELABLE"
     }
-
-
 }
+
+

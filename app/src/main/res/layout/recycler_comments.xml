@@ -7,7 +7,7 @@
 
         <variable
             name="comments"
-            type="com.dan.jamiicfapp.data.db.entities.Comment" />
+            type="com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

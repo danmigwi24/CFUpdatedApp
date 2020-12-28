@@ -12,7 +12,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 data class DisabledCaseDetails(
     @PrimaryKey(autoGenerate = false)
-    @SerializedName("disabilitycase_id")
+    @SerializedName("id")
     val disabilitycaseId: Int,
     @SerializedName("disability_case")
     val disabilityCase: String,

@@ -18,6 +18,7 @@ class SessionManager(context: Context) {
         const val KEY_SAVED_TIME3: String = "time"
         const val PWD_ID: String = "pwd_id"
         const val USER_ID: String = "user_id"
+        const val DISABILITYCASE_ID: String = "disabilitycase_id"
         const val RECORDEDCASE_ID: String = "RecordedCaseId"
     }
 
@@ -88,6 +89,21 @@ class SessionManager(context: Context) {
         return prefs.getInt(RECORDEDCASE_ID, 0)
 
     }
+    /**
+     * Function to save DisabilityCase id
+     * Function to fetch DisabilityCase id
+     */
+    fun saveDisabilityCaseId(disabilityId: Int) {
+        val editor = prefs.edit()
+        editor.putInt(DISABILITYCASE_ID, disabilityId)
+        editor.apply()
+    }
+
+    fun fetchDisabilityCaseId(): Int? {
+        return prefs.getInt(DISABILITYCASE_ID, 0)
+
+    }
+
 
     /**
      * Function to save UserId

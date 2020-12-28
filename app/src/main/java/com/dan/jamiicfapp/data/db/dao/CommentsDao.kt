@@ -5,8 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dan.jamiicfapp.data.db.entities.Comment
-import com.dan.jamiicfapp.data.db.entities.JcaEvent
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment
 
 @Dao
 interface CommentsDao {

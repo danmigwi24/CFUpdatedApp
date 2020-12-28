@@ -8,6 +8,7 @@ import com.dan.jamiicfapp.data.db.preference.SessionManager
 import com.dan.jamiicfapp.data.network.JcaApiService
 import com.dan.jamiicfapp.data.network.SafeApiRequest
 import com.dan.jamiicfapp.data.network.jcaresponse.addDisabiltycaseResponse.DisabilityCaseAddedResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.editdisability.UpdateDisabilityResponse
 import com.dan.jamiicfapp.utils.Coroutines
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -67,18 +68,34 @@ class PwdsRepository(
         description: RequestBody,
         amountRequired: RequestBody,
         image: MultipartBody.Part
-        //desc: RequestBody,
 
     ): DisabilityCaseAddedResponse {
         return apiRequest {
             jcaApiService.postDisabilityCase(
-                //AddDisabilityCase(
                 disabilityCase,
                 description,
                 amountRequired,
                 image
 
-                //)
+            )
+
+        }
+    }
+
+    suspend fun updateCaseRepo(
+        updateId: Int,
+        disabilityCase: RequestBody,
+        description: RequestBody,
+        amountRequired: RequestBody,
+        image: MultipartBody.Part
+    ): UpdateDisabilityResponse {
+        return apiRequest {
+            jcaApiService.updateDisabilityCase(
+                updateId,
+                disabilityCase,
+                description,
+                amountRequired,
+                image
             )
 
         }

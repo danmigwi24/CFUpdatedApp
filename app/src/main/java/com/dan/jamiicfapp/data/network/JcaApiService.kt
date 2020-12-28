@@ -6,7 +6,9 @@ import com.dan.jamiicfapp.data.network.jcaresponse.addDisabiltycaseResponse.Disa
 import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentByIdResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.DonationResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.editdisability.UpdateDisabilityResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse.FeedbackResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse.GetFeedbackResponseAll
 import com.dan.jamiicfapp.data.network.jcaresponse.recordcaseresponse.getrecord.FetchRecordCasesResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.recordcaseresponse.postrecord.RecordCaseResponse
 import com.dan.jamiicfapp.data.network.requestbodys.AddCaseRecord
@@ -54,11 +56,19 @@ interface JcaApiService {
         @Part("description") description: RequestBody,
         @Part("amount_required") amount_required: RequestBody,
         @Part image: MultipartBody.Part
-        //@Part("desc") desc: RequestBody,
 
     ): Response<DisabilityCaseAddedResponse>
 
-
+//UPDATING DISABILITY CASE
+    @Multipart
+    @POST("editdisabilitycase/{updateId}")
+    suspend fun updateDisabilityCase(
+        @Path("updateId") updateId: Int,
+        @Part("disability_case") disability_case: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("amount_required") amount_required: RequestBody,
+        @Part image: MultipartBody.Part
+    ): Response<UpdateDisabilityResponse>
     /**
      * Report Case Api
      */
@@ -100,6 +110,11 @@ interface JcaApiService {
         @Field("member_community_id") member_community_id: String,
         @Field("feedback") feedback: String
     ): Response<FeedbackResponse>
+
+
+    @GET("getFeedback")
+    suspend fun getFeeback(): Response<GetFeedbackResponseAll>
+
 
     /**
      * Comment Api

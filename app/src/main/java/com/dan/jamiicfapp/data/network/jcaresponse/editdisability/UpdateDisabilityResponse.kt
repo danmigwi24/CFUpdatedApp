@@ -1,13 +1,13 @@
-package com.dan.jamiicfapp.data.network.jcaresponse.commentresponse
+package com.dan.jamiicfapp.data.network.jcaresponse.editdisability
 
 
 import com.google.gson.annotations.SerializedName
 
-data class CommentByIdResponse(
+data class UpdateDisabilityResponse(
     @SerializedName("isSuccessful")
     val isSuccessful: Boolean,
     @SerializedName("message")
     val message: String,
-    @SerializedName("comment")
-    val comment: List<Comment>?
+    @SerializedName("disabilitycase")
+    val disabilitycase: Boolean
 )
