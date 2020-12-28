@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView
 
 class AdminActivity : AppCompatActivity() {
 
+    //Not in Git
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
