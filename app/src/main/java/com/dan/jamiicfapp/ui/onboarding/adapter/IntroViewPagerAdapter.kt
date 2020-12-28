@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.layout_introviewpager.view.*
 
 class IntroViewPagerAdapter(
     private val context: Context,
-    private val introdata: ArrayList<Introdata>
+    private val introData: ArrayList<Introdata>
 ) :
     PagerAdapter() {
 
@@ -20,9 +20,11 @@ class IntroViewPagerAdapter(
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.layout_introviewpager, null)
 
-        view.textViewTitle.text = introdata[position].title
-        view.textViewDescription.text = introdata[position].description
-        view.imageView.setImageResource(introdata[position].image!!.toInt())
+        with(view) {
+            textViewTitle.text = introData[position].title
+            textViewDescription.text = introData[position].description
+            imageView.setImageResource(introData[position].image!!.toInt())
+        }
 
         container.addView(view)
         return view
@@ -34,5 +36,5 @@ class IntroViewPagerAdapter(
 
     override fun isViewFromObject(view: View, `object`: Any) = view == `object`
 
-    override fun getCount() = introdata.size
+    override fun getCount() = introData.size
 }

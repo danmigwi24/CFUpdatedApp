@@ -45,7 +45,7 @@ class KodeinApplication : Application(), KodeinAware {
         }
 
         //Donation and Payments
-        bind() from singleton { DonateRepository(instance()) }
+        bind() from singleton { DonateRepository(instance(),instance(),instance()) }
         bind() from provider { MpesaViewModelProvider(instance()) }
 
         //Recordcase

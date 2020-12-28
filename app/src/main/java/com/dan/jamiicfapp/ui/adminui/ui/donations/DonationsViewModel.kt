@@ -3,11 +3,12 @@ package com.dan.jamiicfapp.ui.adminui.ui.donations
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dan.jamiicfapp.data.repository.DonateRepository
+import com.dan.jamiicfapp.utils.lazyDeferred
 
-class DonationsViewModel : ViewModel() {
+class DonationsViewModel(private val donateRepository: DonateRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Donations"
+    val donationlist by lazyDeferred {
+     donateRepository.getAllpwdDetails()
     }
-    val text: LiveData<String> = _text
 }

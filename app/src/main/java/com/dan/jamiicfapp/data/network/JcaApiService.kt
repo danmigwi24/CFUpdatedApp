@@ -6,6 +6,7 @@ import com.dan.jamiicfapp.data.network.jcaresponse.addDisabiltycaseResponse.Disa
 import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentByIdResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.CommentResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.DonationResponse
+import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.getdonation.GetListDonationResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.editdisability.UpdateDisabilityResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse.FeedbackResponse
 import com.dan.jamiicfapp.data.network.jcaresponse.feedbackresponse.GetFeedbackResponseAll
@@ -100,6 +101,11 @@ interface JcaApiService {
         @Field("phonenumber") phonenumber: String,
         @Field("amount_donated") amount_donated: String
     ): Response<DonationResponse>
+
+
+
+    @GET("getDonations")
+    suspend fun getDonations():Response<GetListDonationResponse>
 
     /**
      * Feedback Api

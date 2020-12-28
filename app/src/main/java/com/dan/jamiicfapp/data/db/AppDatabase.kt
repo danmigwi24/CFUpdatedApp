@@ -5,14 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dan.jamiicfapp.data.db.dao.*
-import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment
 import com.dan.jamiicfapp.data.db.entities.DisabledCaseDetails
 import com.dan.jamiicfapp.data.db.entities.JcaEvent
 import com.dan.jamiicfapp.data.db.entities.User
+import com.dan.jamiicfapp.data.network.jcaresponse.commentresponse.Comment
+import com.dan.jamiicfapp.data.network.jcaresponse.donationresponse.getdonation.DonationList
 import com.dan.jamiicfapp.data.network.jcaresponse.recordcaseresponse.getrecord.RecordedCase
 
 @Database(
-    entities = [User::class, DisabledCaseDetails::class, JcaEvent::class, Comment::class, RecordedCase::class],
+    entities = [User::class, DisabledCaseDetails::class, JcaEvent::class, Comment::class, RecordedCase::class, DonationList::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -22,6 +23,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getListOfEventsDao(): EventsDao
     abstract fun getListOfCommentDao(): CommentsDao
     abstract fun getListOfCaseRecorded(): CaseRecordedDao
+    abstract fun getDonationList(): DonationListDao
 
     companion object {
         @Volatile

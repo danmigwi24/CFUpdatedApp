@@ -15,7 +15,7 @@
         android:id="@+id/nav_donations"
         android:name="com.dan.jamiicfapp.ui.adminui.ui.donations.DonationsFragment"
         android:label="@string/title_donation"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_donationlist" />
 
     <fragment
         android:id="@+id/nav_disabilities"
